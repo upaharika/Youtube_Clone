@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { FETCH_VIDEOS_URL, GOOGLE_KEY } from "../constant";
+import { FETCH_VIDEOS_URL } from "../constant";
+import { showMenu } from "../store/appSlice";
+import { cacheVideoList } from "../store/videosSlice";
 import VideoCard from "./VideoCard";
 
 const VideoList = () => {
-  const [videoList, setVideoList] = useState([]);
+  const videoList = useSelector((store) => store.videos.videoList);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchData();
+    !videoList?.length && fetchData();
+    dispatch(showMenu());
   }, []);
 
   const fetchData = async () => {
     const data = await fetch(FETCH_VIDEOS_URL);
     const json = await data.json();
-    setVideoList(json.items);
+    dispatch(cacheVideoList(json.items));
   };
 
-  return (
+  return !videoList?.length ? (
+    <h1>No Videos Found</h1>
+  ) : (
     <div className="flex flex-wrap">
       {videoList.map((video) => (
         <VideoCard videoData={video} key={video.id} />

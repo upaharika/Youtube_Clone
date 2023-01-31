@@ -1,8 +1,9 @@
 import { Provider } from "react-redux";
+import { RouterProvider } from "react-router";
 import "./App.css";
-import Body from "./components/Body";
 import Navbar from "./components/Navbar";
 import Panel from "./components/Panel";
+import { appRouter } from "./Routes/routes";
 import { store } from "./store/store";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <Navbar />
         <div className="grid grid-flow-col grid-cols-12">
           <Panel />
-          <Body />
+          <RouterProvider router={appRouter} />
         </div>
       </div>
     </Provider>
