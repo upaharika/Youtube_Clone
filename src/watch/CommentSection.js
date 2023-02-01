@@ -4,10 +4,13 @@ import { comments } from "../constant";
 
 const renderComments = (comments) =>
   comments.map((comment) => (
-    <div>
+    <div className="w-[50vw]">
       <Comment comments={comment} />
       {comment?.replies && (
-        <div className="pl-2 ml-5 border border-gray-200 rounded-md">
+        <div
+          className="pl-2 ml-5 border border-gray-200 rounded-md"
+          key={comment}
+        >
           {renderComments(comment?.replies)}
         </div>
       )}

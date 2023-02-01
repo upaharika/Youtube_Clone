@@ -5,7 +5,7 @@ const VideoContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const videoId = searchParams.get("v");
   return (
-    <div className="p-10">
+    <div>
       <iframe
         width="1400"
         height="600"

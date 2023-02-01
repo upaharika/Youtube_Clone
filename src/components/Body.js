@@ -4,7 +4,7 @@ import VideoList from "./VideoList";
 
 const Body = () => {
   return (
-    <div className="col-span-10 p-10 w-full shadow-lg">
+    <div className="col-span-12 m-5 w-full">
       <div>
         <TagList />
       </div>
