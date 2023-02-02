@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { handleToggleMenu } from "../store/appSlice";
 
+const handleAPICall = (searchText) => {
+  console.log(searchText);
+};
+
 const Navbar = () => {
+  const [searchedText, setSearchText] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const apiTimer = setTimeout(() => {
+      handleAPICall(searchedText);
+    }, 300);
+
+    return () => {
+      clearTimeout(apiTimer);
+    };
+  }, [searchedText]);
+
   const toggleHandler = () => {
     dispatch(handleToggleMenu());
   };
@@ -27,6 +43,8 @@ const Navbar = () => {
         <input
           className="bg-gray-50 border text-gray-800 border-gray-300 rounded-lg w-full p-2 mt-4"
           type="text"
+          value={searchedText}
+          onChange={(e) => setSearchText(e.target.value)}
           placeholder="search"
         />
       </div>
